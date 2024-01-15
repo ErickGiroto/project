@@ -4,12 +4,12 @@ public class Board { // Tabuleiro
 
 	private int rows;
 	private int columns;
-	private Piece[][] piece;
+	private Piece[][] pieces;
 
 	public Board(int rows, int columns) {
 		this.rows = rows;
 		this.columns = columns;
-		piece = new Piece[rows][columns];
+		pieces = new Piece[rows][columns];
 	}
 
 	public int getRows() {
@@ -30,12 +30,20 @@ public class Board { // Tabuleiro
 
 	// Posição da Linha e Coluna
 	public Piece piece(int row, int column) {
-		return piece[row][column];
+		return pieces[row][column];
 	}
 
 	// Retornando a peça pela Posição
 	public Piece piece(Position position) {
-		return piece[position.getRow()][position.getColumn()];
+		return pieces[position.getRow()][position.getColumn()];
+	}
+	
+	// Atribuir a posicao a peça que veio como argumento
+	public void placePiece(Piece piece, Position position) {
+		pieces[position.getRow()][position.getColumn()] = piece;
+		
+		//Dizer que a peça não está na posição nula e informar que está na posição - 'posistion'
+		piece.position = position; // O Acesso ao piece só é possivel porque está no mesmo pacote boardgame
 	}
 
 }
