@@ -1,6 +1,6 @@
 package boardgame;
 
-public class Position {
+public class Position { // Posições
 	private int row;
 	private int column;
 
