@@ -1,11 +1,11 @@
 package boardgame;
 
 public class Board { // Tabuleiro
-	
+
 	private int rows;
 	private int columns;
 	private Piece[][] piece;
-	
+
 	public Board(int rows, int columns) {
 		this.rows = rows;
 		this.columns = columns;
@@ -28,15 +28,14 @@ public class Board { // Tabuleiro
 		this.columns = columns;
 	}
 
-	public Piece[][] getPiece() {
-		return piece;
+	// Posição da Linha e Coluna
+	public Piece piece(int row, int column) {
+		return piece[row][column];
 	}
 
-	public void setPiece(Piece[][] piece) {
-		this.piece = piece;
+	// Retornando a peça pela Posição
+	public Piece piece(Position position) {
+		return piece[position.getRow()][position.getColumn()];
 	}
-	
-	
-	
 
 }
