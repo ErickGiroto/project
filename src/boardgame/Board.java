@@ -56,15 +56,15 @@ public class Board { // Tabuleiro
 	
 	
 	// Criando as defensivas do Game
-	public boolean positionExists(int row, int column) {
+	public boolean positionExists(int row, int column) { // Posicao que existente
 		return row >= 0 && row < rows && column >= 0 && column < columns;
 	}
 	
-	public boolean positionExists(Position position) {
+	public boolean positionExists(Position position) { // Posicao que não existe
 		return positionExists(position.getRow(), position.getColumn());
 	}
 	
-	public boolean thereIsAPice(Position position) {
+	public boolean thereIsAPice(Position position) { // Posicao da peca
 		if(!positionExists(position)) {
 			throw new BoardException("Posição que não está no quadro");			
 		}
