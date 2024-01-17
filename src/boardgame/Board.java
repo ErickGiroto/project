@@ -7,10 +7,10 @@ public class Board { // Tabuleiro
 	private Piece[][] pieces;
 
 	public Board(int rows, int columns) {
-		if(rows < 1 || columns < 1) {
+		if (rows < 1 || columns < 1) {
 			throw new BoardException("Erro ao criar o quadro: Tem de haver pelo menos 1 linha e 1 coluna");
 		}
-		
+
 		this.rows = rows;
 		this.columns = columns;
 		pieces = new Piece[rows][columns];
@@ -24,56 +24,61 @@ public class Board { // Tabuleiro
 		return columns;
 	}
 
-	
 	// Posição da Linha e Coluna
 	public Piece piece(int row, int column) {
-		if(!positionExists(row, column)) {
-			throw new BoardException("Posição que não está no quadro");			
+		if (!positionExists(row, column)) {
+			throw new BoardException("Posição que não está no quadro");
 		}
 		return pieces[row][column];
 	}
 
-	
 	// Retornando a peça pela Posição
 	public Piece piece(Position position) {
-		if(!positionExists(position)) {
-			throw new BoardException("Posição que não está no quadro");			
+		if (!positionExists(position)) {
+			throw new BoardException("Posição que não está no quadro");
 		}
 		return pieces[position.getRow()][position.getColumn()];
 	}
-	
-	
+
 	// Atribuir a posicao a peça que veio como argumento
 	public void placePiece(Piece piece, Position position) {
-		if(thereIsAPice(position)) {
+		if (thereIsAPice(position)) {
 			throw new BoardException("Já existe uma peça na posição " + position);
 		}
 		pieces[position.getRow()][position.getColumn()] = piece;
-		
-		//Dizer que a peça não está na posição nula e informar que está na posição - 'posistion'
+
+		// Dizer que a peça não está na posição nula e informar que está na posição -
+		// 'posistion'
 		piece.position = position; // O Acesso ao piece só é possivel porque está no mesmo pacote boardgame
 	}
-	
-	
+
+	public Piece removePiece(Position position) {
+		if (!positionExists(position)) {
+			throw new BoardException("Posicao tem no tabuleiro");
+		}
+		if (piece(position) == null) {
+			return null;
+		}
+		Piece aux = piece(position);
+		aux.position = null; // Essa peça foi retirada do tabuleiro
+		pieces[position.getRow()][position.getColumn()] = null;	
+		return aux;
+	}
+
 	// Criando as defensivas do Game
 	public boolean positionExists(int row, int column) { // Posicao que existente
 		return row >= 0 && row < rows && column >= 0 && column < columns;
 	}
-	
+
 	public boolean positionExists(Position position) { // Posicao que não existe
 		return positionExists(position.getRow(), position.getColumn());
 	}
-	
+
 	public boolean thereIsAPice(Position position) { // Posicao da peca
-		if(!positionExists(position)) {
-			throw new BoardException("Posição que não está no quadro");			
+		if (!positionExists(position)) {
+			throw new BoardException("Posição que não está no quadro");
 		}
 		return piece(position) != null;
 	}
-	
-	
-	
-	
-	
 
 }
