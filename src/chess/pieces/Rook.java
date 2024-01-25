@@ -14,5 +14,12 @@ public class Rook extends ChessPiece { // Class TORRE
 	public String toString() {
 		return "T"; // Letra que ira aparecer na tabela T que significa TORRE
 	}
+	
+	@Override
+	public boolean[][] possibleMoves() {
+		boolean[][] mat = new boolean[getBoard().getRows()][getBoard().getColumns()];
+		return mat;
+	}
+
 
 }

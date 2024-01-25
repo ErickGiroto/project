@@ -35,29 +35,26 @@ public class ChessMatch { // Nessa Class é o Coração do programa, ou seja, as
 		Position target = targetPosition.toPosition();
 		validateSourcePosition(source);
 		Piece capturedPiece = makeMove(source, target); // Responsavel por mover a peça
-		return (ChessPiece)capturedPiece;
+		return (ChessPiece) capturedPiece;
 	}
-	
-	
-	
+
 	private Piece makeMove(Position source, Position target) {
 		Piece p = board.removePiece(source);
 		Piece capturedPiece = board.piece(target);
 		board.placePiece(p, target);
 		return capturedPiece;
 	}
-	
-	
+
 	private void validateSourcePosition(Position position) {
-		if(!board.thereIsAPice(position)) {
+		if (!board.thereIsAPice(position)) {
 			throw new ChessException("Não existe peça na posicao de origem");
 		}
+
+		if (!board.piece(position).IsThereAnyPossibleMove()) {
+			throw new ChessException("Não existe movimento para a peça escolhida");
+
+		}
 	}
-	
-	
-	
-	
-	
 
 	// Passando as coordenada no tabuleiro do xadrez
 	private void placeNewPiece(char column, int row, ChessPiece piece) {

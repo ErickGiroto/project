@@ -15,4 +15,10 @@ public class King extends ChessPiece { // Class REI
 		return "R"; // Letra que ira aparecer na tabela R que significa REI
 	}
 
+	@Override
+	public boolean[][] possibleMoves() {
+		boolean[][] mat = new boolean[getBoard().getRows()][getBoard().getColumns()];
+		return mat;
+	}
+
 }
