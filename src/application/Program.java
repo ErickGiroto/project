@@ -2,6 +2,7 @@ package application;
 
 import java.util.Scanner;
 
+import chess.ChessException;
 import chess.ChessMatch;
 import chess.ChessPiece;
 import chess.ChessPosition;
@@ -14,20 +15,25 @@ public class Program {
 		ChessMatch chessMatch = new ChessMatch();
 
 		while (true) {// Repetindo
-			UI.printBoard(chessMatch.getPieces()); // Metodo vai receber a matriz de peças da partida
+			try {
+
+				UI.clearScreen();
+				UI.printBoard(chessMatch.getPieces()); // Metodo vai receber a matriz de peças da partida
+
+				System.out.println();
+				System.out.print("Origem: "); // Peça de origem
+				ChessPosition source = UI.readChessPosition(sc);
+
+				System.out.println();
+				System.out.print("Destino: "); // Peça com destino
+				ChessPosition target = UI.readChessPosition(sc);
+
+				ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
+			} 
 			
-			
-			System.out.println();
-			System.out.println("Origem:  "); // Peça de origem
-			ChessPosition source = UI.readChessPosition(sc);
-			
-			
-			System.out.println();
-			System.out.println("Destino: "); // Peça com destino
-			ChessPosition target = UI.readChessPosition(sc);
-			
-			ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
-			
+			catch (ChessException e) {
+				System.out.println(e.getMessage());
+			}
 
 		}
 
